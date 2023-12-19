@@ -39,14 +39,14 @@ func (sf *logger) setLogProvider(p LogProvider) {
 	}
 }
 
-// Error Log ERROR level message.
+// Errorf Error Log ERROR level message.
 func (sf logger) Errorf(format string, v ...interface{}) {
 	if atomic.LoadUint32(&sf.has) == 1 {
 		sf.provider.Errorf(format, v...)
 	}
 }
 
-// Debug Log DEBUG level message.
+// Debugf Debug Log DEBUG level message.
 func (sf logger) Debugf(format string, v ...interface{}) {
 	if atomic.LoadUint32(&sf.has) == 1 {
 		sf.provider.Debugf(format, v...)
@@ -61,12 +61,12 @@ type defaultLogger struct {
 // check implement LogProvider interface.
 var _ LogProvider = (*defaultLogger)(nil)
 
-// Error Log ERROR level message.
+// Errorf Error Log ERROR level message.
 func (sf defaultLogger) Errorf(format string, v ...interface{}) {
 	sf.Printf("[E]: "+format, v...)
 }
 
-// Debug Log DEBUG level message.
+// Debugf Debug Log DEBUG level message.
 func (sf defaultLogger) Debugf(format string, v ...interface{}) {
 	sf.Printf("[D]: "+format, v...)
 }
